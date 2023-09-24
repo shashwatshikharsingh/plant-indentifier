@@ -4,6 +4,10 @@
 
 Welcome to the Plant Identifier project! This project is designed to help users identify various plant species by uploading or taking pictures of plants. It uses Flask, OpenCV, Python, and Jinja to create a website that offers features such as user registration, login, logout, image recognition, and detailed plant information display.
 
+## Screenshots
+![Homepage](github_screenshots/homepage.png)
+![Plant Information](github_screenshots/plant-info.png)
+
 ## Features
 
 ### User Authentication
