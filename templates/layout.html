@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayurveda  {% block title %}{% endblock %} </title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link crossorigin="anonymous" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" rel="stylesheet">
+    <script crossorigin="anonymous" src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"></script>
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <ul>
+                <li class="brand"><img src="/static/assets/Final_logo-PhotoRoom.png-PhotoRoom.png" alt=""></li>
+            </ul>
+        </div>
+
+        <div class="name">
+            <img src="/static/assets/Ministry_of_Ayush-removebg-preview.png" alt="">
+        </div>
+
+        <div class="searchbar">
+            <input type="text" id="search-bar" placeholder="Search for..">
+            <button>Search</button>
+        </div>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/">About</a></li>
+            {% if session["user_id"] %}
+            <li><a href="/logout">Logout</a></li>
+            {% else %}
+            <li><a href="/login">Login</a></li>
+            <li><a href="/register">Register</a></li>
+            {% endif %}
+
+
+        </ul>
+    </nav>
+
+
+    {% block main %}{% endblock %}
+    <div class="cards-container">
+        <div class="plant-1">
+            <a href="#"><img src="/static/assets/Ashwagandha.png" alt=""></a>
+            <h2>Ashwagandha</h2>
+            <a href="">More details</a>
+        </div>
+
+        <div class="plant-1">
+            <a href="#"><img src="/static/assets/Bamboo.png" alt=""></a>
+            <h2>Bamboo</h2>
+            <a href="">More details</a>
+        </div>
+
+        <div class="plant-1">
+            <a href="#"><img src="/static/assets/Neem.png" alt=""></a>
+            <h2>Neem</h2>
+            <a href="">More details</a>
+        </div>
+
+        <div class="plant-1">
+            <a href="#"><img src="/static/assets/Doddapatre.png" alt=""></a>
+            <h2>Doddapatre</h2>
+            <a href="">More details</a>
+        </div>
+
+        <div class="plant-1">
+            <a href="#"><img src="/static/assets/Insulin.png" alt=""></a>
+            <h2>Insulin</h2>
+            <a href="">More details</a>
+        </div>
+    </div>
+
+    <!-- <div class="cards-container-2">
+        <div class="plant-1">
+            <a href="#"><img src="/static/assets/Ashwagandha.png" alt=""></a>
+            <h2>Ashwagandha</h2>
+            <a href="">More details</a>
+        </div>
+
+        <div class="plant-1">
+            <a href="#"><img src="/static/assets/Bamboo.png" alt=""></a>
+            <h2>Bamboo</h2>
+            <a href="">More details</a>
+        </div>
+
+        <div class="plant-1">
+            <a href="#"><img src="/static/assets/Brahmi.png" alt=""></a>
+            <h2>Brahmi</h2>
+            <a href="">More details</a>
+        </div>
+
+        <div class="plant-1">
+            <a href="#"><img src="/static/assets/Doddapatre.png" alt=""></a>
+            <h2>Doddapatre</h2>
+            <a href="">More details</a>
+        </div>
+
+        <div class="plant-1">
+            <a href="#"><img src="/static/assets/Insulin.png" alt=""></a>
+            <h2>Insulin</h2>
+            <a href="">More details</a>
+        </div>
+    </div> -->
+
+    <footer>
+        <p>Copyright &#169; 2023</p>
+
+        <img src="/static/assets/Final_logo-PhotoRoom.png-PhotoRoom.png" alt="">
+
+        <img src="/static/assets/Ministry_of_Ayush-removebg-preview.png" alt="">
+
+    </footer>
+
+</body>
+</html>

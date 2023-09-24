@@ -1,0 +1,5 @@
+Flask==2.2.2
+joblib==1.2.0
+numpy==1.24.1
+opencv_python==4.8.0.76
+Werkzeug==2.2.2

@@ -1,0 +1,161 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+
+<section class="design-container">
+    <aside>
+        <div class="modi-details">
+            <img src="/static/assets/qrcode.png" alt="Banner Details">
+        </div>
+    </aside>
+
+    <main>
+        <div class="swiper-container">
+            <div class="swiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide"><img src="/static/assets/Alovera.png" alt=""></div>
+                    <div class="swiper-slide"><img src="/static/assets/Ashwagandha.png" alt=""></div>
+                    <div class="swiper-slide"><a href="/cod.html" target="_blank"><img src="/static/assets/Bamboo.png" alt=""></a>
+                    </div>
+                    <div class="swiper-slide"><img src="/static/assets/Brahmi.png" alt=""></div>
+                    <div class="swiper-slide"><img src="/static/assets/Doddapatre.png" alt=""></div>
+                </div>
+            
+                <div class="swiper-pagination"></div>
+    
+            
+                    
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-button-next"></div>
+            </div>
+        </div>
+    </main>
+
+    <aside>
+        <div class="plant-details">
+            <div class="cards-h1">
+                <h1>Alovera</h1>
+            </div>
+            <img src="/static/assets/Alovera.png" alt="">
+            <div class="details">
+                <p id="location">Locations - Rajasthan,Tamil Nadu etc</p>
+                <p>Season - Summer (March to June)</p>
+                <p>Rainy Monsoon (June to September)</p>
+                <p>Ph level - 6 to 7.5</p>
+            </div>
+            <a href="#">More Details</a>
+        </div>
+    </aside>
+</section>
+ 
+
+<div class="mb-4 text-center">
+    <h2>Camera Capture</h2>
+    <video id="camera-stream" width="640" height="480" autoplay></video>
+    <div class="d-flex justify-content-center gap-32 w-auto mx-auto">
+
+    <div class="text-center">
+        <button id="capture-button" class="btn btn-primary mt-3 mx-auto w-auto ">Capture</button>
+    </div>
+    <div class="text-center">
+        <button id="upload-button" class="btn btn-primary mt-3 mx-auto w-auto">Upload</button>
+        <input type="file" id="file-input" accept="image/*" style="display: none;">
+    </div>
+</div>
+<div class="d-flex justify-content-center w-auto mx-auto">
+    <div class="card w-25 text-center border border-4 border-primary t-4">
+        <div class="card-body text-capitalize font-weight-bold" id="result" style="display:none;">
+           
+
+        </div>
+        <a href="/info" id="info-button" class="btn btn-primary" style="display: none;">More Info</a>
+    </div>
+</div>
+
+
+<script>
+    const videoElement = document.getElementById('camera-stream');
+    const captureButton = document.getElementById('capture-button');
+    const uploadButton = document.getElementById('upload-button');
+    const fileInput = document.getElementById('file-input');
+    const result = document.getElementById('result');
+    const infoButton = document.getElementById('info-button');
+
+    if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+        navigator.mediaDevices.getUserMedia({ video: true })
+            .then(function (stream) {
+                videoElement.srcObject = stream;
+            })
+            .catch(function (error) {
+                console.error('Camera access denied:', error);
+                alert('Camera access denied. Please allow camera access in your browser settings.');
+            });
+
+        captureButton.addEventListener('click', function () {
+            const canvas = document.createElement('canvas');
+            canvas.width = videoElement.videoWidth;
+            canvas.height = videoElement.videoHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(videoElement, 0, 0, canvas.width, canvas.height);
+
+            canvas.toBlob(function (blob) {
+                const formData = new FormData();
+                formData.append('image', blob, 'captured-image.png');
+
+                fetch('/upload', {
+                    method: 'POST',
+                    body: formData,
+                })
+                .catch(function (error) {
+                    console.error('Error uploading image:', error);
+                    alert('Error uploading image. Please try again later.');
+                });
+            }, 'image/png');
+        });
+
+        uploadButton.addEventListener('click', function () {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', function () {
+            const selectedFile = fileInput.files[0];
+            
+            if (selectedFile) {
+                const formData = new FormData();
+                formData.append('image', selectedFile, 'selected-image.png');
+
+                fetch('/upload', {
+    method: 'POST',
+    body: formData,
+}).then(function (response) {
+    response.json().then(function(data) {
+        if (data.result) {
+            result.innerHTML = data.result;
+            result.style.display = 'block';
+            infoButton.style.display = 'block';
+        } else {
+            console.error('Error uploading image');
+            alert('Error uploading image. Please try again later.');
+        }
+    }).catch(function (error) {
+        console.error('Error parsing JSON response:', error);
+        alert('Error parsing JSON response. Please try again later.');
+    });
+}).catch(function (error) {
+    console.error('Error uploading image:', error);
+    alert('Error uploading image. Please try again later.');
+});
+            }
+        });
+    } else {
+        console.error('getUserMedia not supported');
+        alert('Camera access is not supported in your browser.');
+    }
+</script>
+
+{% endblock %}
+
