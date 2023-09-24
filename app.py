@@ -55,15 +55,11 @@ def close_db(error):
         g.sqlite_db.close()
 
 
-@app.route("/",methods=["GET","POST"])
+@app.route("/",methods=["GET"])
 @login_required
 def index():
     """Main Page"""
-    if request.method == "POST":
-        return redirect('/info')
-    else:
-
-        return render_template("index.html")
+    return render_template("index.html")
 
 
 
@@ -112,24 +108,19 @@ def upload():
         return apology("Internal Server Error", 500)
     
  
-@app.route("/info",methods=["GET"])
-def info():
+@app.route("/info/<plant_name>",methods=["GET"])
+def info(plant_name):
     if request.method == "GET":
-        if session["plant_name"] is None:
-            return apology("Plant information not found", 404)
+      
+        plant_info = None
+        for plant in plant_data['plants']:
+            if plant['name'] == plant_name:
+                plant_info = plant
+                break
+        if plant_info:
+            return render_template('info.html', plant_name=plant_info['name'], plant_image=plant_info["image_url"], history=plant_info['History'], location=plant_info['Location'], soil=plant_info['Soil'],medicinal_value=plant_info["MedicinalValue"])
         else:
-            plant_name = session["plant_name"]
-            print(session)
-            plant_info = None
-            for plant in plant_data['plants']:
-                if plant['name'] == plant_name:
-                    plant_info = plant
-                    break
-            if plant_info:
-                session["plant_name"] = None
-                return render_template('info.html', plant_name=plant_info['name'], plant_image=plant_info["image_url"], history=plant_info['History'], location=plant_info['Location'], soil=plant_info['Soil'],medicinal_value=plant_info["MedicinalValue"])
-            else:
-                return apology("Plant information not found", 404)
+            return apology("Plant information not found", 404)
 
 
 

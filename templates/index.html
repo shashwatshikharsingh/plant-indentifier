@@ -85,6 +85,11 @@
     const result = document.getElementById('result');
     const infoButton = document.getElementById('info-button');
 
+
+    infoButton.addEventListener('click', function () {
+        infoButton.href = '/info/' + result.innerHTML;
+    });
+
     if (navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
         navigator.mediaDevices.getUserMedia({ video: true })
             .then(function (stream) {
