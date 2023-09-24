@@ -23,8 +23,8 @@
         </div>
 
         <div class="searchbar">
-            <input type="text" id="search-bar" placeholder="Search for..">
-            <button>Search</button>
+            <input type="text" id="search-bar" placeholder="Search for Plants..">
+            <button id="search-button">Search</button>
         </div>
     </header>
 
@@ -42,6 +42,12 @@
 
         </ul>
     </nav>
+    <script>
+        document.querySelector("#search-button").addEventListener("click", () => {
+            const query = document.querySelector("#search-bar").value;
+            window.location.href = `/info/${query}`;
+        });
+    </script>
 
 
     {% block main %}{% endblock %}
