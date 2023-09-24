@@ -54,20 +54,20 @@
  
 
 <div class="mb-4 text-center">
-    <h2>Camera Capture</h2>
-    <video id="camera-stream" width="640" height="480" autoplay></video>
-    <div class="d-flex justify-content-center gap-32 w-auto mx-auto">
+    <h2 style="font-weight: bolder; color: rgb(255, 255, 255); background-color: #A2C579; padding: 10px;">Camera Capture</h2>
+    <video style="border: 5px solid #A2C579;" id="camera-stream" width="640" height="480" autoplay></video>
+    <div class="d-flex justify-content-center gap-5 w-auto mx-auto">
 
-    <div class="text-center">
-        <button id="capture-button" class="btn btn-primary mt-3 mx-auto w-auto ">Capture</button>
+    <div class="text-center gap-5" >
+        <button style="background-color: #A2C579; border: #A2C579;" id="capture-button" class="btn btn-primary mt-3 mx-auto w-auto ">Capture</button>
     </div>
     <div class="text-center">
-        <button id="upload-button" class="btn btn-primary mt-3 mx-auto w-auto">Upload</button>
+        <button style="background-color: #A2C579; border: #A2C579;" id="upload-button" class="btn btn-primary mt-3 mx-auto w-auto">Upload</button>
         <input type="file" id="file-input" accept="image/*" style="display: none;">
     </div>
 </div>
-<div class="d-flex justify-content-center w-auto mx-auto">
-    <div class="card w-25 text-center border border-4 border-primary t-4">
+<div class="d-flex justify-content-center p-2 w-auto mx-auto">
+    <div class="card w-25 text-center border t-4" style="background-color: #ffffff;">
         <div class="card-body text-capitalize font-weight-bold" id="result" style="display:none;">
            
 
