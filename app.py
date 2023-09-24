@@ -45,6 +45,7 @@ def get_db():
     """Open a new database connection if there is none yet for the current application context."""
     if not hasattr(g, 'sqlite_db'):
         g.sqlite_db = sqlite3.connect("ayurveda_users.db")
+        g.sqlite_db.execute("CREATE TABLE IF NOT EXISTS users (id INTEGER PRIMARY KEY AUTOINCREMENT, username TEXT NOT NULL, hash TEXT NOT NULL)")
     return g.sqlite_db
 
 
