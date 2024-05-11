@@ -34,7 +34,7 @@ Welcome to the Plant Identifier project! This project is designed to help users 
 
 1. Clone the repository:
    ```
-   git clone https://github.com/shashwatshikharsingh/plant-identifier.git
+   git clone https://github.com/shashwatshikharsingh/plant-indentifier.git
    cd plant-identifier
    ```
 
